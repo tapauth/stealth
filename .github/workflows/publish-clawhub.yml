@@ -23,4 +23,4 @@ jobs:
         run: |
           clawhub auth login --token "$CLAWHUB_TOKEN" --no-browser
           VERSION="${GITHUB_REF_NAME#v}"
-          clawhub publish . --slug stealth --name "Stealth" --version "$VERSION" --changelog "${{ github.event.release.body }}" --no-input
+          clawhub publish stealth --slug stealth --name "Stealth" --version "$VERSION" --changelog "${{ github.event.release.body }}" --no-input
