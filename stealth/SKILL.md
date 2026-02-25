@@ -77,6 +77,22 @@ See `references/captcha-setup.md` for provider setup, API integration code, and 
 
 See `references/browser-stealth.md` for Playwright stealth config, header templates, and anti-fingerprinting.
 
+## Geo-Blocked Services
+
+Some services block access by country, not just by datacenter detection. Common with crypto/prediction market platforms.
+
+**Polymarket** is the most common case — blocked in US, UK, France, Germany, Italy, Australia, and 25+ other countries. See `references/polymarket-geoblock.md` for the full blocked country list, how to detect the block, which proxy countries work best (Ireland, Portugal), and country-targeting syntax for major proxy providers.
+
+**Detection pattern:** If you get silent order rejections, 403s on trade endpoints, or "not available in your region" — check the service's geoblock before debugging anything else:
+
+```bash
+# Polymarket geoblock check (works through proxy too)
+curl -s https://polymarket.com/api/geoblock | python3 -c "
+import sys,json;d=json.load(sys.stdin)
+print(f'Blocked: {d[\"blocked\"]} | Country: {d.get(\"country\")} | IP: {d.get(\"ip\")}')
+"
+```
+
 ## Troubleshooting
 
 | Problem | Fix |
