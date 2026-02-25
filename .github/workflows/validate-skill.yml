@@ -20,4 +20,6 @@ jobs:
         run: pip install skills-ref
 
       - name: Validate skill
-        run: agentskills validate .
+        run: |
+          ln -s "$GITHUB_WORKSPACE" /tmp/stealth
+          agentskills validate /tmp/stealth
