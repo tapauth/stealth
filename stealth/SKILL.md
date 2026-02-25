@@ -8,6 +8,7 @@ description: >
   IP blocks, or is running on a datacenter/cloud IP. Covers: residential proxy setup,
   CAPTCHA solver configuration, stealth browser fingerprinting. For web scraping,
   browser automation, form filling, and any task where bot detection is a problem.
+  Compatible with Puppeteer, Playwright, Selenium, and headless Chrome.
 ---
 
 # Stealth — Anti-Bot Detection for AI Agents
