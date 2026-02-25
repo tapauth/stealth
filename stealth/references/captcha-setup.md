@@ -4,15 +4,36 @@
 
 Using the wrong provider wastes money and fails silently.
 
-| CAPTCHA | CapSolver | 2Captcha | Anti-Captcha |
-|---------|-----------|----------|-------------|
-| hCaptcha | ✅ | ❌ DROPPED | ✅ |
-| reCAPTCHA v2 | ✅ | ✅ | ✅ |
-| reCAPTCHA v3 | ✅ | ✅ | ✅ |
-| Turnstile | ✅ | ✅ | ✅ |
-| Image/text | ❌ | ✅ | ✅ |
+| CAPTCHA | CapSolver | 2Captcha | Anti-Captcha | SolveCaptcha |
+|---------|-----------|----------|-------------|-------------|
+| hCaptcha | ⚠️ PARTIAL | ❌ DROPPED | ⚠️ UNLISTED | ❌ NOT SUPPORTED |
+| reCAPTCHA v2 | ✅ | ✅ | ✅ | ✅ |
+| reCAPTCHA v3 | ✅ | ✅ | ✅ | ✅ |
+| Turnstile | ✅ | ✅ | ✅ | ✅ |
+| Image/text | ❌ | ✅ | ✅ | ✅ |
 
-**2Captcha removed hCaptcha support in late 2025.** Submitting hCaptcha tasks returns `ERROR_METHOD_CALL`. Do not retry — switch to CapSolver.
+### hCaptcha: The Hard Truth (2026)
+
+**No captcha solver service reliably solves hCaptcha for all sites.**
+
+- **2Captcha** — removed hCaptcha entirely in late 2025. Returns `ERROR_METHOD_CALL`.
+- **CapSolver** — has `HCaptchaTaskProxyLess` API but **silently blocks high-profile sites** (e.g., Discord). Returns `ERROR_INVALID_TASK_DATA: Request has been blocked due to a violation of our usage policies`. No public blocklist exists — you only discover blocks by testing. This is likely due to business agreements with hCaptcha.
+- **Anti-Captcha** — documents `HCaptchaTaskProxyless` in their API but does NOT list hCaptcha on their pricing page. Untested for Discord specifically.
+- **SolveCaptcha** — does not support hCaptcha at all. Returns `ERROR_METHOD_CALL`. Despite Reddit recommendations (likely outdated/astroturfed).
+
+### hCaptcha Accessibility Mode: Does NOT Work
+
+hCaptcha offers an "Accessibility Challenge" (text-based questions instead of visual puzzles) via the accessibility menu. While the text questions are trivially solvable by an LLM, **this approach fails in practice**:
+- Sites like Discord detect accessibility mode usage and may reject the token
+- hCaptcha may serve increasingly difficult challenges or block entirely
+- The accessibility cookie approach requires a verified hCaptcha account
+
+### What Actually Works for hCaptcha
+
+1. **Human solves it** — VNC/remote desktop, 30 seconds, 100% success rate
+2. **CapSolver** — works for sites NOT on their secret blocklist
+3. **Custom solvers** — open-source GPT-4 vision-based solvers exist (e.g., `xtekky/Discord-Hcaptcha-Solver`) but are fragile and high-maintenance
+4. **Browser fingerprint quality** — a clean enough browser fingerprint sometimes passes the checkbox click alone without a challenge
 
 ## CapSolver Setup
 
