@@ -81,7 +81,9 @@ See `references/browser-stealth.md` for Playwright stealth config, header templa
 
 Some services block access by country, not just by datacenter detection. Common with crypto/prediction market platforms.
 
-**Polymarket** is the most common case — blocked in US, UK, France, Germany, Italy, Australia, and 25+ other countries. See `references/polymarket-geoblock.md` for the full blocked country list, detection methods, which proxy countries work best (Ireland, Portugal), and country-targeting syntax for major proxy providers.
+**Polymarket** is the most common case — blocked in US, UK, France, Germany, Italy, Australia, and 25+ other countries.
+
+See [`references/polymarket-geoblock.md`](references/polymarket-geoblock.md) for the full blocked country list, detection methods, recommended proxy countries, and provider-specific targeting syntax.
 
 ## Troubleshooting
 
